@@ -9,7 +9,7 @@ const Navbar = () => {
         <img className='h-[11vh]' src={noteLogo} alt="" />
         <h1 className="text-3xl font-bold h-[10vh] flex items-center">Notara</h1>
       </div>
-      <hr class="border-t border-gray-300 my-0 w-95/100" />
+      <hr className="border-t border-gray-300 my-0 w-95/100" />
 
       <NavLink to="/">Home</NavLink>
       <NavLink to="/notes">All Notes</NavLink>
