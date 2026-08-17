@@ -13,7 +13,7 @@ const Homepage = () => {
     <div>
 
       <div>
-      <button className='m-5 border-2 p-2 rounded-[15px] border-gray-500'
+      <button className='ml-[3vw] border-2 p-2 rounded-[15px] border-gray-500'
       onClick={()=>setShowNotePannel(!showNotePannel)}
       >
         {noteId? "Update Note": "Create Note"}

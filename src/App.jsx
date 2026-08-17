@@ -13,7 +13,10 @@ const router = createBrowserRouter(
       element: 
       <div className='flex'>
         <Navbar/>
-        <Homepage/>
+        <div>
+          <Homepage/>
+          <Notelist/>
+        </div>
       </div>
     },
     {
