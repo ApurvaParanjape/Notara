@@ -12,7 +12,7 @@ const Notelist = () => {
     <div className='flex ml-[3vw] mt-[2vh] justify-start gap-6 flex-wrap'>
       {
         notes.map((note)=>(
-          <Note key={note._id} title={note.title} content={note.content} createdAt={note.createdAt}/>
+          <Note key={note._id} title={note.title} content={note.content} createdAt={note.createdAt} _id={note._id} note={note}/>
         ))
       }
     </div>

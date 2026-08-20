@@ -31,7 +31,10 @@ const NotePannel = (props) => {
         //cleanup
         props.setSearch("");
         props.setNoteContent("");
-        props.noteId = "";
+        // props.noteId = "";
+
+        props.setShowNotePannel(false);
+
     }
 
     return (

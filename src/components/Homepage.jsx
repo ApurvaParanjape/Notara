@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSearchParams } from 'react-router-dom';
 import NotePannel from './NotePannel';
+import Notelist from './Notelist';
 
 const Homepage = () => {
   const [search, setSearch] = useState();
@@ -26,6 +27,7 @@ const Homepage = () => {
 
       <NotePannel showNotePannel={showNotePannel} setShowNotePannel={setShowNotePannel} search={search} setSearch={setSearch} noteContent={noteContent} setNoteContent={setNoteContent} noteId={noteId}/>
 
+      <Notelist/>
     </div>
   )
 }

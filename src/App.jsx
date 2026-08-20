@@ -15,7 +15,7 @@ const router = createBrowserRouter(
         <Navbar/>
         <div>
           <Homepage/>
-          <Notelist/>
+          {/* <Notelist/> */}
         </div>
       </div>
     },

@@ -32,9 +32,9 @@ export const noteSlice = createSlice({
       localStorage.setItem("notes", JSON.stringify(state.notes))
     },
     removeNote: (state, action) => {
-      const note = action.payload;
+      const noteID = action.payload;
 
-      const index = state.notes.findIndex((item)=> item._id===note._id)
+      const index = state.notes.findIndex((item)=> item._id===noteID)
 
       if(index>=0){
         state.notes.splice(index,1);
