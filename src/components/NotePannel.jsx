@@ -31,7 +31,7 @@ const NotePannel = (props) => {
         //cleanup
         props.setSearch("");
         props.setNoteContent("");
-        // props.noteId = "";
+        props.setNoteID("");
 
         props.setShowNotePannel(false);
 
@@ -60,7 +60,7 @@ const NotePannel = (props) => {
 
       <button className='mx-5 mt-5 border-2 border-gray-500 w-[90%] h-[6vh] p-2 rounded-[15px] bg-purple-400'
       onClick={createNote}
-      >Create</button>  
+      >{props.noteId? "Update": "Create"}</button>  
     </div>
 
         

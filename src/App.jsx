@@ -5,6 +5,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Homepage from './components/Homepage'
 import Notelist from './components/Notelist'
 import Note from './components/Note'
+import ViewNote from './components/ViewNote'
 
 const router = createBrowserRouter(
   [
@@ -32,8 +33,8 @@ const router = createBrowserRouter(
       element: 
       <div className='flex'>
         <Navbar/>
-        <Notelist/>
-        <Note/>
+        {/* <Notelist/> */}
+        <ViewNote/>
       </div>
     },
   ]
@@ -42,7 +43,7 @@ const router = createBrowserRouter(
 function App() {
 
   return (
-    <div className='flex'>
+    <div className='flex max-w-[100vw]'>
       <RouterProvider router={router}/>
     </div>
   )

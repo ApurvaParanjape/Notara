@@ -2,18 +2,15 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { removeNote, updateNote } from '../redux/noteSlice';
 import toast from 'react-hot-toast';
+import { Link } from "react-router-dom";
+
 
 const Note = (props) => {
   const dispatch = useDispatch();
 
   const note = props.note;
 
-  function HandleEdit(){
-    // dispatch(updateNote(props._id))
-    // console.log()
-  }
-
-  function handleDelete(){
+   function handleDelete(){
     console.log("delete btn clicked")
     dispatch(removeNote(props._id))
   }
@@ -33,10 +30,11 @@ const Note = (props) => {
 
       <div className='flex justify-end items-end mt-5'>
         <button className='m-1 border-1'
-        onClick={HandleEdit}>E</button>
+        onClick={()=>props.handleEditNote(note)}>E</button>
         <button className='m-1 border-1'
         onClick={handleDelete}>D</button>
-        <button className='m-1 border-1'>S</button>
+        <button className='m-1 border-1'
+        ><Link to={`/notes/${note?._id}`}>V</Link></button>
         <button className='m-1 border-1'>St</button>
         <button className='m-1 border-1'
         onClick={handleCopy}>cpy</button>

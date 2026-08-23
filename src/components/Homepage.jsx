@@ -9,6 +9,15 @@ const Homepage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const noteId = searchParams.get("noteId");
   const [showNotePannel, setShowNotePannel] = useState(false);
+  const [noteID, setNoteID] = useState("");
+
+  function handleEditNote(note){
+    setNoteContent(note?.content);
+    setSearch(note?.title);
+    setNoteID(note?._id);
+
+    setShowNotePannel(true);
+  }
 
   return (
     <div>
@@ -17,7 +26,7 @@ const Homepage = () => {
       <button className='ml-[3vw] border-2 p-2 rounded-[15px] border-gray-500'
       onClick={()=>setShowNotePannel(!showNotePannel)}
       >
-        {noteId? "Update Note": "Create Note"}
+        {noteID? "Update Note": "Create Note"}
       </button>
 
       <input className='m-1 border-2 border-gray-500 w-[60vw] h-[6vh] p-2 rounded-[15px]'
@@ -25,9 +34,9 @@ const Homepage = () => {
 
       </div>
 
-      <NotePannel showNotePannel={showNotePannel} setShowNotePannel={setShowNotePannel} search={search} setSearch={setSearch} noteContent={noteContent} setNoteContent={setNoteContent} noteId={noteId}/>
+      <NotePannel showNotePannel={showNotePannel} setShowNotePannel={setShowNotePannel} search={search} setSearch={setSearch} noteContent={noteContent} setNoteContent={setNoteContent} noteId={noteID} setNoteID={setNoteID}/>
 
-      <Notelist/>
+      <Notelist handleEditNote={handleEditNote}/>
     </div>
   )
 }
