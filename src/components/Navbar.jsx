@@ -12,8 +12,8 @@ const Navbar = () => {
       <hr className="border-t border-gray-300 my-0 w-95/100" />
 
       <NavLink to="/">Home</NavLink>
-      <NavLink to="/notes">All Notes</NavLink>
-      {/* <NavLink>Shared</NavLink> */}
+      {/* <NavLink to="/notes">All Notes</NavLink> */}
+      <NavLink>Starred</NavLink>
       {/* <NavLink>Trash</NavLink> */}
     </div>
   )

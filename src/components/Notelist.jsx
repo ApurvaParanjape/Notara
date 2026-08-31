@@ -7,10 +7,23 @@ const Notelist = (props) => {
   const notes = useSelector((state)=>state.note.notes)
   const dispatch = useDispatch();
 
+  const filtered_notes = notes.filter((note)=>
+    note.title.toLowerCase().includes(props.searchTerm.toLowerCase())
+  )
   
   return (
     <div className='flex ml-[3vw] mt-[2vh] justify-start gap-6 flex-wrap'>
+      {/* {
+        notes.map((note)=>(
+          <Note key={note._id} title={note.title} content={note.content} createdAt={note.createdAt} _id={note._id} note={note} handleEditNote={props.handleEditNote}/>
+        ))
+      } */}
       {
+        filtered_notes.length? 
+        filtered_notes.map((note)=>(
+          <Note key={note._id} title={note.title} content={note.content} createdAt={note.createdAt} _id={note._id} note={note} handleEditNote={props.handleEditNote}/>
+        ))
+        :
         notes.map((note)=>(
           <Note key={note._id} title={note.title} content={note.content} createdAt={note.createdAt} _id={note._id} note={note} handleEditNote={props.handleEditNote}/>
         ))
