@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { removeNote, updateNote } from '../redux/noteSlice';
+import { removeNote, starNote, updateNote } from '../redux/noteSlice';
 import toast from 'react-hot-toast';
 import { Link } from "react-router-dom";
 
@@ -35,7 +35,8 @@ const Note = (props) => {
         onClick={handleDelete}>D</button>
         <button className='m-1 border-1'
         ><Link to={`/notes/${note?._id}`}>V</Link></button>
-        <button className='m-1 border-1'>St</button>
+        <button className='m-1 border-1'
+        onClick={()=>dispatch(starNote(note._id))}>{note.isStarred ? "★" : "☆"}</button>
         <button className='m-1 border-1'
         onClick={handleCopy}>cpy</button>
       </div>

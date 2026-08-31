@@ -14,7 +14,8 @@ const NotePannel = (props) => {
             _id: props.noteId || Date.now().toString(36),
             title: props.search,
             content: props.noteContent,
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString(),
+            isStarred: false
         }
         console.log("props.noteId:", props.noteId);
         console.log("new ID:", Date.now().toString(36));

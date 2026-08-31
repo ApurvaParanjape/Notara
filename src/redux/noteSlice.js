@@ -43,10 +43,25 @@ export const noteSlice = createSlice({
         toast.success("Note deleted")
       }
     },
+    starNote: (state, action) => {
+      const noteID = action.payload;
+
+      const index = state.notes.findIndex((item)=> item._id===noteID)
+      const note = state.notes[index];
+
+      if(note){
+        note.isStarred = !note.isStarred;
+        
+        state.notes[index] = note;
+
+        localStorage.setItem("notes", JSON.stringify(state.notes))
+        // toast.success("Note Starred")
+      }
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addNote, updateNote, resetAllNotes, removeNote} = noteSlice.actions
+export const { addNote, updateNote, resetAllNotes, removeNote, starNote} = noteSlice.actions
 
 export default noteSlice.reducer

@@ -7,8 +7,13 @@ const Notelist = (props) => {
   const notes = useSelector((state)=>state.note.notes)
   const dispatch = useDispatch();
 
-  const filtered_notes = notes.filter((note)=>
-    note.title.toLowerCase().includes(props.searchTerm.toLowerCase())
+  const filtered_notes = notes.filter((note)=>{
+    const matchesSearch = note.title.toLowerCase().includes(props.searchTerm.toLowerCase())
+
+    const matchesStarred = !props.showStarred || note.isStarred;
+
+    return matchesSearch && matchesStarred;
+  }
   )
   
   return (
@@ -19,14 +24,16 @@ const Notelist = (props) => {
         ))
       } */}
       {
-        filtered_notes.length? 
+        filtered_notes.length>0?
         filtered_notes.map((note)=>(
           <Note key={note._id} title={note.title} content={note.content} createdAt={note.createdAt} _id={note._id} note={note} handleEditNote={props.handleEditNote}/>
         ))
         :
-        notes.map((note)=>(
-          <Note key={note._id} title={note.title} content={note.content} createdAt={note.createdAt} _id={note._id} note={note} handleEditNote={props.handleEditNote}/>
-        ))
+        (
+          <div>
+            {props.showStarred ? "No starred notes" : "No notes found"}
+          </div>
+  )
       }
     </div>
   )

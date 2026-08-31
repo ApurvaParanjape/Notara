@@ -37,6 +37,17 @@ const router = createBrowserRouter(
         <ViewNote/>
       </div>
     },
+    // {
+    //   path: "/starred",
+    //   element: 
+    //   <div className='flex'>
+    //     <Navbar/>
+    //     <div>
+    //       <Homepage/>
+    //       {/* <Notelist/> */}
+    //     </div>
+    //   </div>
+    // },
   ]
 )
 

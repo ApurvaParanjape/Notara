@@ -6,11 +6,12 @@ import Notelist from './Notelist';
 const Homepage = () => {
   const [search, setSearch] = useState();
   const [noteContent, setNoteContent] = useState();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const noteId = searchParams.get("noteId");
   const [showNotePannel, setShowNotePannel] = useState(false);
   const [noteID, setNoteID] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  // const noteId = searchParams.get("noteId");
+  const showStarred = searchParams.get("filter") === "starred";
 
   function handleEditNote(note){
     setNoteContent(note?.content);
@@ -37,7 +38,7 @@ const Homepage = () => {
 
       <NotePannel showNotePannel={showNotePannel} setShowNotePannel={setShowNotePannel} search={search} setSearch={setSearch} noteContent={noteContent} setNoteContent={setNoteContent} noteId={noteID} setNoteID={setNoteID}/>
 
-      <Notelist handleEditNote={handleEditNote} searchTerm={searchTerm}/>
+      <Notelist handleEditNote={handleEditNote} searchTerm={searchTerm} showStarred={showStarred}/>
     </div>
   )
 }
