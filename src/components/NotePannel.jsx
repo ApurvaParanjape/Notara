@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {useDispatch} from 'react-redux'
 import { addNote, updateNote } from '../redux/noteSlice';
 
 const NotePannel = (props) => {
     const dispatch = useDispatch();
+
+    const [tag, setTag] = useState("");
+
 
     function closePannel(){
         props.setShowNotePannel(false);
@@ -15,7 +18,8 @@ const NotePannel = (props) => {
             title: props.search,
             content: props.noteContent,
             createdAt: new Date().toISOString(),
-            isStarred: false
+            isStarred: false,
+            tags:[],
         }
         console.log("props.noteId:", props.noteId);
         console.log("new ID:", Date.now().toString(36));
@@ -38,6 +42,19 @@ const NotePannel = (props) => {
 
     }
 
+    function handleAddTag(){
+        if(tag.trim()==="") return;
+        else{
+            props.setTags([...props.tags, tag.trim()]);
+            setTag("");
+        }
+    }
+
+    function handleRemoveTag(index){
+        const updatedTags = props.tags.filter((_, i) => i !== index);
+        props.setTags(updatedTags);
+    }
+
     return (
     <div className={`fixed top-0 right-0 h-screen w-[40vw] z-50 border-2 bg-white flex flex-col items-center transform transition-transform duration-500 ${props.showNotePannel ? "translate-x-0" : "translate-x-full"}`}>
       
@@ -58,6 +75,29 @@ const NotePannel = (props) => {
       value={props.noteContent}
       onChange={(e)=> props.setNoteContent(e.target.value)}
       ></textarea>
+
+      <div className='flex w-[100%] justify-center items-center'>
+      <input type="text" 
+      placeholder='Enter Tags here' 
+      className='mx-4 border-2 border-gray-500 w-[73%] h-[6vh] p-2 rounded-[15px]'
+      value={tag}
+      onChange={(e)=> setTag(e.target.value)}/>
+
+        <button className='mr-3 border-2 border-gray-500 w-[15%] h-[6vh] p-2 rounded-[15px] bg-purple-400' onClick={handleAddTag}>Add Tag</button>
+      </div>
+
+      <div className='mr-auto ml-[5%] mt-1 w-[73%] flex items-center justify-start gap-2'>
+        {props.tags.map((tag, index) => (
+        <div className=' border-2 border-gray-500 w-max text-[10px] h-[6vh] p-2 rounded-[15px] bg-purple-100 flex justify-between items-center gap-3'>
+        <span key={index}>
+            {tag}
+        <button 
+        onClick={()=>handleRemoveTag(index)}
+        >X</button>
+        </span>
+        </div>
+        ))}
+      </div>
 
       <button className='mx-5 mt-5 border-2 border-gray-500 w-[90%] h-[6vh] p-2 rounded-[15px] bg-purple-400'
       onClick={createNote}

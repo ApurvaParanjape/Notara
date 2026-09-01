@@ -13,10 +13,14 @@ const Homepage = () => {
   // const noteId = searchParams.get("noteId");
   const showStarred = searchParams.get("filter") === "starred";
 
+  const [tags, setTags] = useState([]);
+
   function handleEditNote(note){
     setNoteContent(note?.content);
     setSearch(note?.title);
     setNoteID(note?._id);
+    setTags(note?.tags || []);
+
 
     setShowNotePannel(true);
   }
@@ -36,7 +40,7 @@ const Homepage = () => {
 
       </div>
 
-      <NotePannel showNotePannel={showNotePannel} setShowNotePannel={setShowNotePannel} search={search} setSearch={setSearch} noteContent={noteContent} setNoteContent={setNoteContent} noteId={noteID} setNoteID={setNoteID}/>
+      <NotePannel showNotePannel={showNotePannel} setShowNotePannel={setShowNotePannel} search={search} setSearch={setSearch} noteContent={noteContent} setNoteContent={setNoteContent} noteId={noteID} setNoteID={setNoteID} tags={tags} setTags={setTags}/>
 
       <Notelist handleEditNote={handleEditNote} searchTerm={searchTerm} showStarred={showStarred}/>
     </div>
