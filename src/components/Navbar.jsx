@@ -4,10 +4,10 @@ import noteLogo from '../assets/notaraLogo1.png'
 
 const Navbar = () => {
   return (
-    <div className='flex flex-col gap-4 border-2 border-black items-center h-[100vh] w-[20vw] shrink-0 sticky top-0 '>
+    <div className='flex flex-col gap-4 items-center h-[100vh] w-[20vw] shrink-0 fixed top-0 left-0 h-screen bg-gray-100 '>
       <div className='flex h-auto justify-center items-center'>
         <img className='h-[11vh]' src={noteLogo} alt="" />
-        <h1 className="text-3xl font-bold h-[10vh] flex items-center">Notara</h1>
+        <h1 className="text-[5vh] font-bold h-[10vh] flex items-center">Notara</h1>
       </div>
       <hr className="border-t border-gray-300 my-0 w-95/100" />
 

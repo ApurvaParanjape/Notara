@@ -32,7 +32,7 @@ const Homepage = () => {
       <button className='ml-[3vw] border-2 p-2 rounded-[15px] border-gray-500'
       onClick={()=>setShowNotePannel(!showNotePannel)}
       >
-        {noteID? "Update Note": "Create Note"}
+        Create Note
       </button>
 
       <input className='m-1 border-2 border-gray-500 w-[60vw] h-[6vh] p-2 rounded-[15px]'

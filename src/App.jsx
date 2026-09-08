@@ -14,7 +14,7 @@ const router = createBrowserRouter(
       element: 
       <div className='flex'>
         <Navbar/>
-        <div>
+        <div className='ml-[18vw]'>
           <Homepage/>
           {/* <Notelist/> */}
         </div>
@@ -24,7 +24,7 @@ const router = createBrowserRouter(
       path: "/notes",
       element: 
       <div className='flex'>
-        <Navbar/>
+        <Navbar />
         <Notelist/>
       </div>
     },
@@ -34,7 +34,10 @@ const router = createBrowserRouter(
       <div className='flex'>
         <Navbar/>
         {/* <Notelist/> */}
-        <ViewNote/>
+        <div className='ml-[18vw]'>
+          <ViewNote/>
+        </div>
+        
       </div>
     },
     // {
