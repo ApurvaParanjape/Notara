@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { removeNote, starNote, updateNote } from '../redux/noteSlice';
 import toast from 'react-hot-toast';
@@ -19,10 +19,16 @@ const ViewNote = () => {
   
     const {id} = useParams();
 
+    const dispatch = useDispatch();
+
     const notes = useSelector((state)=> state.note.notes);
 
     const note = notes.find((note)=> note._id === id);
 
+    function handleCopy(){
+    navigator.clipboard.writeText(note?.content)
+    toast.success("Copied to clipbord")
+    }
   
     return (
     <div className='ml-[3vw] w-[78vw] h-screen'>
@@ -33,19 +39,19 @@ const ViewNote = () => {
           </button>
         </div>
 
-        <div className='flex justify-start items-start gap-3 flex-wrap'>
-        <button className='m-1'
+        <div className='flex justify-start items-start gap-3 flex-wrap  mr-[3vw]'>
+        {/* <button className='m-1'
         // onClick={()=>props.handleEditNote(note)}
         >
           <FontAwesomeIcon icon={faPenToSquare} />
-        </button>
+        </button> */}
         
         <button className='m-1'
         onClick={()=>dispatch(starNote(id))}>
           {note.isStarred ? <FontAwesomeIcon icon={faStarSolid} style={{color: "rgb(255, 212, 59)",}} /> :<FontAwesomeIcon icon={faStar} />}
         </button>
         <button className='m-1'
-        // onClick={handleCopy}
+        onClick={handleCopy}
         >
           <FontAwesomeIcon icon={faCopy}/>
         </button>
@@ -53,7 +59,16 @@ const ViewNote = () => {
       </div>
       <div className='mx-[3vw] my-[2vh]'>
 
-      <p>{note.title}</p>
+      <p className='text-[2rem] font-bold'>{note.title}</p>
+      <div className='flex justify-start items-start my-[1vh] gap-1 flex-wrap'>
+        {note.tags && note.tags?.map((tag, index) => (
+        <span key={index}
+        className='border-2 rounded-[10px] p-1 border-gray-500'>
+          {tag}
+        </span>
+        ))}
+      </div>
+      
       <small className='mt-2'>
         Last Updated: {new Date(note?.createdAt).toLocaleDateString("en-GB", {
           day: "2-digit",

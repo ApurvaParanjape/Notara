@@ -3,12 +3,13 @@ import {useDispatch} from 'react-redux'
 import { addNote, updateNote } from '../redux/noteSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import toast from 'react-hot-toast';
 
 const NotePannel = (props) => {
     const dispatch = useDispatch();
 
     const [tag, setTag] = useState("");
-    
+    const [showCustomTag, setShowCustomTag] = useState(false);
 
     function closePannel(){
         props.setNoteContent("");
@@ -19,6 +20,16 @@ const NotePannel = (props) => {
     }
   
     function createNote(){
+        if (props.search.trim() === "") {
+            toast.error("Please add title")
+        return;
+        }
+
+        if (props.noteContent.trim() === "") {
+         toast.error("Please add content")
+        return;
+        }
+        
         const note={
             _id: props.noteId || Date.now().toString(36),
             title: props.search,
@@ -65,7 +76,11 @@ const NotePannel = (props) => {
     <div className={`fixed top-0 right-0 h-screen w-[40vw] z-50 border-2 bg-white flex flex-col items-center transform transition-transform duration-500 ${props.showNotePannel ? "translate-x-0" : "translate-x-full"}`}>
       
       <div className='w-[90%] mt-1 p-2 flex justify-between items-center'>
-        <p className='p-2 rounded-[5px] w-[90%] text-center text-[2.5vh] font-bold'>Create a New Note</p>
+        <p className='p-2 rounded-[5px] w-[90%] text-center text-[2.5vh] font-bold'>
+            {
+                props.noteId? "Update Note" :"Create a New Note"
+            }
+        </p>
         <button className='p-2 w-[7%] text-center'
         onClick={closePannel}
         >
@@ -78,7 +93,7 @@ const NotePannel = (props) => {
       value={props.search}
       onChange={(e)=>props.setSearch(e.target.value)}/>
 
-      <textarea className='m-5 border-2 border-gray-500 w-[90%] h-[60vh] p-2 rounded-[15px]'
+      <textarea className='m-5 border-2 border-gray-500 w-[90%] h-[50vh] p-2 rounded-[15px]'
       type="text" placeholder='Enter content here'
       value={props.noteContent}
       onChange={(e)=> props.setNoteContent(e.target.value)}
@@ -96,12 +111,14 @@ const NotePannel = (props) => {
 
       <div className='mr-auto ml-[5%] mt-1 w-[73%] flex items-center justify-start gap-2'>
         {props.tags.map((tag, index) => (
-        <div className=' border-2 border-gray-500 w-max text-[10px] h-[6vh] p-2 rounded-[15px] bg-purple-100 flex justify-between items-center gap-3'>
+        <div className=' border-2 border-gray-500 w-max text-[10px] h-[5vh] p-2 rounded-[15px] bg-purple-100 flex justify-between items-center gap-3'>
         <span key={index}>
             {tag}
-        <button 
+        <button className='ml-1'
         onClick={()=>handleRemoveTag(index)}
-        >X</button>
+        >
+            <FontAwesomeIcon icon={faXmark} />
+        </button>
         </span>
         </div>
         ))}

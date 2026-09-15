@@ -8,7 +8,7 @@ const Notelist = (props) => {
   const dispatch = useDispatch();
 
   const filtered_notes = notes.filter((note)=>{
-    const matchesSearch = note.title.toLowerCase().includes(props.searchTerm.toLowerCase())
+    const matchesSearch = note.title?.toLowerCase().includes(props.searchTerm.toLowerCase())
 
     const matchesStarred = !props.showStarred || note.isStarred;
 

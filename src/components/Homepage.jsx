@@ -4,8 +4,8 @@ import NotePannel from './NotePannel';
 import Notelist from './Notelist';
 
 const Homepage = () => {
-  const [search, setSearch] = useState();
-  const [noteContent, setNoteContent] = useState();
+  const [search, setSearch] = useState("");
+  const [noteContent, setNoteContent] = useState("");
   const [showNotePannel, setShowNotePannel] = useState(false);
   const [noteID, setNoteID] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
