@@ -11,7 +11,7 @@ import { faEye } from '@fortawesome/free-regular-svg-icons'
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as faStarSolid  } from '@fortawesome/free-solid-svg-icons'
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
-
+import { getTagColor } from '../redux/utils/tagColor';
 
 const Note = (props) => {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const Note = (props) => {
       <div className='flex justify-start items-start mt-2 gap-1 flex-wrap'>
         {props.note.tags? props.note.tags?.map((tag, index) => (
         <span key={index}
-        className='border-2 rounded-[10px] p-1 border-gray-500'>
+        className={`border-2 rounded-[10px] p-1 ${getTagColor(tag)}`}>
           {tag}
         </span>
         )):

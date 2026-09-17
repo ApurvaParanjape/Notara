@@ -13,6 +13,7 @@ import { faStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as faStarSolid  } from '@fortawesome/free-solid-svg-icons'
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { getTagColor } from '../redux/utils/tagColor';
 
 
 const ViewNote = () => {
@@ -31,7 +32,7 @@ const ViewNote = () => {
     }
   
     return (
-    <div className='ml-[3vw] w-[78vw] h-screen'>
+    <div className='ml-[1vw] w-[78vw] h-screen'>
       <div className='flex justify-between items-center mx-[3vw] my-[2vh] '>
         <div className=''>
           <button className='border-2 p-2 rounded-[15px] border-gray-500'>
@@ -63,7 +64,7 @@ const ViewNote = () => {
       <div className='flex justify-start items-start my-[1vh] gap-1 flex-wrap'>
         {note.tags && note.tags?.map((tag, index) => (
         <span key={index}
-        className='border-2 rounded-[10px] p-1 border-gray-500'>
+        className={`border-2 rounded-[10px] p-1 ${getTagColor(tag)}`}>
           {tag}
         </span>
         ))}

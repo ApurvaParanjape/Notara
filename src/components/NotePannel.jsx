@@ -4,6 +4,7 @@ import { addNote, updateNote } from '../redux/noteSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
+import { getTagColor } from '../redux/utils/tagColor';
 
 const NotePannel = (props) => {
     const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const NotePannel = (props) => {
         props.setTags([]);
         props.setSearch("");
         props.setShowNotePannel(false);
+        setShowCustomTag(false)
     }
   
     function createNote(){
@@ -58,12 +60,14 @@ const NotePannel = (props) => {
         props.setShowNotePannel(false);
 
     }
+    
 
     function handleAddTag(){
         if(tag.trim()==="") return;
         else{
             props.setTags([...props.tags, tag.trim()]);
             setTag("");
+            setShowCustomTag(false)
         }
     }
 
@@ -99,19 +103,51 @@ const NotePannel = (props) => {
       onChange={(e)=> props.setNoteContent(e.target.value)}
       ></textarea>
 
-      <div className='flex w-[100%] justify-center items-center'>
-      <input type="text" 
+      <div className='flex w-[100%] justify-center items-start'>
+      {/* <input type="text" 
       placeholder='Enter Tags here' 
       className='mx-4 border-2 border-gray-500 w-[73%] h-[6vh] p-2 rounded-[15px]'
       value={tag}
-      onChange={(e)=> setTag(e.target.value)}/>
+      onChange={(e)=> setTag(e.target.value)}/> */}
+      
+      <div className='mx-4 w-[73%]'>
+      <select
+      className='border-2 border-gray-500 w-[100%] h-[6vh] p-2 rounded-[15px]'
+      placeholder="Select a Tag"
+      onChange={(e)=>{
+        if(e.target.value==="Others"){
+            setShowCustomTag(true);
+        }
+        else if (e.target.value !== ""){
+            setShowCustomTag(false);
+
+            props.setTags([...props.tags, e.target.value])
+        }
+      }}
+      >
+        <option value="">Select a Tag</option>
+        <option value="Study">Study</option>
+        <option value="Work">Work</option>
+        <option value="Personal">Personal</option>
+        <option value="Home">Home</option>
+        <option value="Others">Others</option>
+      </select>
+
+      {showCustomTag && 
+        <input type="text" 
+        placeholder='Enter Tags here' 
+        className='border-2 border-gray-500 w-[100%] h-[6vh] p-2 rounded-[15px] my-1'
+        value={tag}
+        onChange={(e)=> setTag(e.target.value)}/>
+      }
+      </div>
 
         <button className='mr-3 border-2 border-gray-500 w-[15%] h-[6vh] p-2 rounded-[15px] bg-purple-400' onClick={handleAddTag}>Add Tag</button>
       </div>
 
       <div className='mr-auto ml-[5%] mt-1 w-[73%] flex items-center justify-start gap-2'>
         {props.tags.map((tag, index) => (
-        <div className=' border-2 border-gray-500 w-max text-[10px] h-[5vh] p-2 rounded-[15px] bg-purple-100 flex justify-between items-center gap-3'>
+        <div className={`border-2 border-gray-500 w-max text-[10px] h-[5vh] p-2 rounded-[15px] ${getTagColor(tag)} flex justify-between items-center gap-3`}>
         <span key={index}>
             {tag}
         <button className='ml-1'
