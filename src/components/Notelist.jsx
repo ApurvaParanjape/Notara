@@ -1,18 +1,30 @@
 import React from 'react'
 import Note from './Note'
 import { useDispatch, useSelector } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
 
 const Notelist = (props) => {
   
   const notes = useSelector((state)=>state.note.notes)
   const dispatch = useDispatch();
 
+  const [searchParams] = useSearchParams();
+  
+  const filteredTag = searchParams.get("tag");
+  console.log("selectedTag:", filteredTag);
+
   const filtered_notes = notes.filter((note)=>{
+    const fixedTags = ["Study", "Work", "Personal", "Home"];
+    
     const matchesSearch = note.title?.toLowerCase().includes(props.searchTerm.toLowerCase())
-
     const matchesStarred = !props.showStarred || note.isStarred;
+    const matchesTag = !filteredTag? true :(
+      filteredTag==="Others"?
+      note.tags?.some((tag)=> !fixedTags.includes(tag))
+      : note.tags?.includes(filteredTag)
+    )
 
-    return matchesSearch && matchesStarred;
+    return matchesSearch && matchesStarred && matchesTag;
   }
   )
   

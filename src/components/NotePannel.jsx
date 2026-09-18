@@ -15,6 +15,7 @@ const NotePannel = (props) => {
     function closePannel(){
         props.setNoteContent("");
         props.setNoteID("");
+        setTag("")
         props.setTags([]);
         props.setSearch("");
         props.setShowNotePannel(false);
@@ -58,7 +59,8 @@ const NotePannel = (props) => {
         props.setNoteID("");
         props.setTags([]);
         props.setShowNotePannel(false);
-
+        setTag("")
+        setShowCustomTag(false);
     }
     
 
